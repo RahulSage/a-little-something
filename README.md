@@ -14,7 +14,7 @@ npm install
 npm run dev
 ```
 
-Preview any moment by adding `?now=` to the URL (the clock runs forward from there):
+While running `npm run dev`, preview any moment by adding `?now=` to the URL (the clock runs forward from there). The production build ignores it and always uses the real clock.
 
 - `?now=2026-10-05T23:59:55%2B05:30` – watch the midnight reveal
 - `?now=2026-10-06T15:00:00%2B05:30` – birthday mode

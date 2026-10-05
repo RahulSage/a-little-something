@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 /**
- * Preview any moment with `?now=2026-10-05T23:59:55+05:30` — the clock then
+ * In `npm run dev`, preview any moment with `?now=2026-10-05T23:59:55+05:30` — the clock then
  * runs forward from there in real time. (A `+` in a URL arrives as a space.)
  */
 function mockOffset(): number {
@@ -10,7 +10,8 @@ function mockOffset(): number {
   return Number.isNaN(t) ? 0 : t - Date.now();
 }
 
-const offset = typeof location === 'undefined' ? 0 : mockOffset();
+// Dev-only: the live site always follows the real clock.
+const offset = import.meta.env.DEV && typeof location !== 'undefined' ? mockOffset() : 0;
 export const clockNow = () => Date.now() + offset;
 
 /** Re-renders on every whole second, aligned to the wall clock. */
