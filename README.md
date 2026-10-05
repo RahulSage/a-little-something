@@ -16,6 +16,8 @@ npm run dev
 
 While running `npm run dev`, preview any moment by adding `?now=` to the URL (the clock runs forward from there). The production build ignores it and always uses the real clock.
 
+A separate preview copy is published at `/preview/`: it always opens 10 seconds before the next birthday midnight (and honours `?now=`).
+
 - `?now=2026-10-05T23:59:55%2B05:30` – watch the midnight reveal
 - `?now=2026-10-06T15:00:00%2B05:30` – birthday mode
 - `?now=2026-10-07T00:00:00%2B05:30` – countdown to next year

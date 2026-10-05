@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { birthdayConfig } from '../config';
+import { nextBirthday } from './time';
 
 /**
  * In `npm run dev`, preview any moment with `?now=2026-10-05T23:59:55+05:30` — the clock then
@@ -10,8 +12,15 @@ function mockOffset(): number {
   return Number.isNaN(t) ? 0 : t - Date.now();
 }
 
-// Dev-only: the live site always follows the real clock.
-const offset = import.meta.env.DEV && typeof location !== 'undefined' ? mockOffset() : 0;
+/** The `/preview/` build (vite --mode preview) opens 10 seconds before the next birthday midnight. */
+function previewOffset(): number {
+  const real = Date.now();
+  return mockOffset() || nextBirthday(real, birthdayConfig) - 10_000 - real;
+}
+
+// The production site always follows the real clock.
+const offset =
+  typeof location === 'undefined' ? 0 : import.meta.env.MODE === 'preview' ? previewOffset() : import.meta.env.DEV ? mockOffset() : 0;
 export const clockNow = () => Date.now() + offset;
 
 /** Re-renders on every whole second, aligned to the wall clock. */
