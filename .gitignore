@@ -1,0 +1,6 @@
+node_modules
+dist
+.claude/settings.local.json
+# original full-size images (optimized copies live in public/photos)
+/ChatGPT Image*.png
+.claude/
